@@ -15,15 +15,17 @@ const SingleReel = ({item,index,currentIndex}) => {
     const onError = error => {
         console.log('error', error);
     };
-
+    const [longpress , setlongpress]=useState(1);
     const [mute, setMute] = useState(false);
 
     // const [like, setLike] = useState(item.isLike);
     return (
-        <View style={styles.videocontainer}>
+    <View style={styles.videocontainer}>
         <TouchableOpacity
             activeOpacity={0.9}
             onPress={()=>{setMute(!mute)}}
+            onLongPress={()=>{setlongpress(0)}}
+            onPressOut={()=>{setlongpress(1)}}
             style={styles.videotouch}
         >
             <Video
@@ -31,8 +33,9 @@ const SingleReel = ({item,index,currentIndex}) => {
                 onBuffer={onBuffer}
                 onError={onError}
                 repeat={true}
-                resizeMode='contain'
+                resizeMode='cover'
                 paused={currentIndex==index?false:true}
+                rate={longpress}
                 source={{uri: item.video_url}}
                 muted={mute}
                 style={styles.videostyle}
@@ -40,13 +43,13 @@ const SingleReel = ({item,index,currentIndex}) => {
             />
         </TouchableOpacity>
         <Icon 
-        size={mute?25:0}
-        color='white'
-        name="volume-off" 
+            size={mute?25:0}
+            color='white'
+            name="volume-mute" 
         />
         <View style={styles.bottomview}>
           <View style={styles.userview}>
-            <TouchableOpacity style={styles.user} onPress={()=>{console.log(item.user.profileimg)}}>
+            <TouchableOpacity style={styles.user}>
             <Image
               source={{uri:item.user.profileimg}}  //item.user.profileimg
               style={styles.profileimg}
@@ -55,13 +58,12 @@ const SingleReel = ({item,index,currentIndex}) => {
             </TouchableOpacity>
           </View>
           <View style={styles.description}>
-            <Text numberOfLines={1} style={styles.desctext}>{item.caption}</Text>
             <TouchableOpacity>
-              <Text style={{color:"white"}}>More</Text>
+              <Text numberOfLines={1} style={styles.desctext}>{item.caption}</Text>
             </TouchableOpacity>
           </View>
         </View>
-        </View>
+    </View>
     )
 }
 
@@ -100,7 +102,8 @@ const styles = StyleSheet.create({
     },
     user:{
         flexDirection:'row',
-        alignItems:'center'
+        alignItems:'center',
+        marginBottom:10,
     },
     profileimg:{
         width:40,
@@ -109,13 +112,15 @@ const styles = StyleSheet.create({
     },
     usernametext:{
         marginHorizontal:10,
-        fontSize:17,
+        fontSize:20,
         color:"white",
     },
     description:{
+        flex:1,
         flexDirection:'row',
         alignItems:'center',
         marginBottom:15,
+        marginRight:20,
     },
     desctext:{
         color:"white",

@@ -17,7 +17,6 @@ const App = () => {
   };
   return (
     <View style={styles.container}>
-      <StatusBar hidden={true}/>
       <View style={styles.safearea}>
         <View style={styles.heading}>
           <Text style={styles.headingtext}>Quickies</Text>
