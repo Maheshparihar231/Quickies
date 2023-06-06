@@ -6,9 +6,8 @@ const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 
 
-const SingleReel = ({item,index,currentIndex}) => {
+const SingleReel = ({item,index,currentIndex,onPress}) => {
     const VideoRef = useRef(null)
-
     const onBuffer = buffer => {
         console.log('buffring', buffer);
     };
@@ -17,8 +16,10 @@ const SingleReel = ({item,index,currentIndex}) => {
     };
     const [longpress , setlongpress]=useState(1);
     const [mute, setMute] = useState(false);
-
     // const [like, setLike] = useState(item.isLike);
+    // function handlePress{
+    //     onPress
+    //     setMute(true);}
     return (
     <View style={styles.videocontainer}>
         <TouchableOpacity
@@ -49,7 +50,13 @@ const SingleReel = ({item,index,currentIndex}) => {
         />
         <View style={styles.bottomview}>
           <View style={styles.userview}>
-            <TouchableOpacity style={styles.user}>
+            <TouchableOpacity 
+            style={styles.user}
+            onPress={
+                onPress
+            }
+            activeOpacity={0.8}
+            >
             <Image
               source={{uri:item.user.profileimg}}  //item.user.profileimg
               style={styles.profileimg}
