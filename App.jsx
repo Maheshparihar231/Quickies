@@ -16,7 +16,7 @@ const App = () => {
         <Stack.Navigator
           screenOptions={{
             headerShown: false,
-            presentation:'transparentModal'
+            //presentation:'transparentModal'
           }}
         >
           <Stack.Screen
@@ -30,7 +30,7 @@ const App = () => {
             component={User}
           />
           <Stack.Screen
-            //options={{headerShown:false}}
+            options={{presentation:'transparentModal'}}
             name="QuickReel"
             component={QuickReel}
           />

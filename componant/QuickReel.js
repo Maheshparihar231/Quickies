@@ -61,6 +61,10 @@ const QuickReel = ({route, navigation}) => {
     console.log('error', error);
   };
   const [longpress , setlongpress]=useState(1);
+  const [showFullCaption, setShowFullCaption] = useState(false);
+  const toggleCaptionVisibility = () => {
+      setShowFullCaption(!showFullCaption);
+  };
   const [mute, setMute] = useState(false);
   return (
     <GestureDetector gesture={gesture}>
@@ -78,17 +82,37 @@ const QuickReel = ({route, navigation}) => {
           onLongPress={()=>{setlongpress(0)}}
           onPressOut={()=>{setlongpress(1)}}
         >
-            <Video
-                VideoRef={VideoRef}
-                onError={onError}
-                onBuffer={onBuffer}
-                repeat={true}
-                resizeMode='cover'
-                source={{uri:data.video_url}}
-                style={styles.videostyle}
-                rate={longpress}
-            />
+        <Video
+            VideoRef={VideoRef}
+            onError={onError}
+            onBuffer={onBuffer}
+            repeat={true}
+            resizeMode='cover'
+            source={{uri:data.video_url}}
+            style={styles.videostyle}
+            rate={longpress}
+        />
         </TouchableOpacity>
+        <Animated.View style={styles.bottomview}>
+          <Animated.View style={styles.description}>
+            <TouchableOpacity 
+                activeOpacity={0.8}
+                onPress={toggleCaptionVisibility}
+                >
+                {showFullCaption ?
+                    (<Animated.Text style={styles.desctext}>{data.caption}</Animated.Text>)
+                    : (
+                        <Animated.Text
+                            numberOfLines={1}
+                            ellipsizeMode='tail'
+                            style={styles.desctext}>
+                            {data.caption}
+                        </Animated.Text>)
+                }
+            </TouchableOpacity>
+          </Animated.View>
+        </Animated.View>
+        
       </Animated.View>
     </GestureDetector>
   );
@@ -107,5 +131,25 @@ const styles = StyleSheet.create({
   videostyle:{
     height:"100%",
     width:"100%",
+  },
+  bottomview: {
+    position: 'absolute',
+    width: "100%",
+    padding: 15,
+    bottom: 0,
+    flex: 1,
+    justifyContent: 'flex-end',
+    margin: 15,
+  },
+  description: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 15,
+    marginRight: 20,
+  },
+  desctext: {
+    color: "white",
+    flex: 1
   }
 });

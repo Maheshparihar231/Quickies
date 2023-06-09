@@ -6,6 +6,12 @@ export const user =
         "profileimg": "https://fastly.picsum.photos/id/366/200/200.jpg?hmac=-4k6Dmgp7_ptjLR2h5ruv6-ntBP_zW5HUFxRsRV_9C4",
         "quickies": "256",
         "followers": "13.6k",
+        "social":{
+            "twitter":"https://twitter.com/DailyLoud",
+            "onlyfans":"https://www.youtube.com/@thedeshbhakt",
+            "redgif":"https://www.reddit.com/r/Cricket/",
+            "instagram":"https://www.instagram.com/instagram"
+        },
     }
 
 export const userreeldata =[
