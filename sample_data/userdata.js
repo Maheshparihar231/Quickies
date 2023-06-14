@@ -8,9 +8,9 @@ export const user =
         "followers": "13.6k",
         "social":{
             "twitter":"https://twitter.com/DailyLoud",
-            "onlyfans":"https://www.youtube.com/@thedeshbhakt",
-            "redgif":"https://www.reddit.com/r/Cricket/",
-            "instagram":"https://www.instagram.com/instagram"
+            "Git":"https://www.youtube.com/@thedeshbhakt",
+            "LinkedIn":"https://www.reddit.com/r/Cricket/",
+            "instagram":"https://www.instagram.com/instagram",
         },
     }
 
